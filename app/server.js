@@ -2,6 +2,8 @@ const express = require("express");
 
 const getMainServer = () => {
   const app = express();
+  app.use(express.json());
+
   require("./routes")(app);
 
   app.get("/", (req, res) => {

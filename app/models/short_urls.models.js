@@ -12,6 +12,10 @@ class ShortUrls extends Model {
   static async create({ data }) {
     return await this.query().insert(data);
   }
+
+  static async getByCode({ short_code }) {
+    return await this.query().where({ short_code: short_code }).first();
+  }
 }
 
 module.exports = ShortUrls;

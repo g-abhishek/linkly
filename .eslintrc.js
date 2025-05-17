@@ -25,6 +25,8 @@ module.exports = {
   },
   rules: {
     "no-unused-vars": "error", // keep code-quality rules only here
+    camelcase: "off",
+    "object-shorthand": "off",
 
     // Below are redundent now, as we are using prettier for formatting
     // quotes: ["error", "double"], // 👈 force double quotes

@@ -1,12 +1,14 @@
-const ShortUrlsModel = require("../models/short_urls.models");
-
 const router = require("express").Router();
+const ShortUrlsModel = require("../models/short_urls.models");
+const { getShortCode } = require("../utils/short-code-generator.utils");
 
 router.post("/", async (req, res) => {
+  const { original_url } = req.body;
+
   const result = await ShortUrlsModel.create({
     data: {
-      original_url: "https://vincit.github.io/objection.js",
-      short_code: "abc1234",
+      original_url,
+      short_code: getShortCode(),
     },
   });
 
@@ -16,9 +18,12 @@ router.post("/", async (req, res) => {
   });
 });
 
-router.get("/:slug", (req, res) => {
-  const { slug } = req.params;
-  res.send(`Original URL for slug=${slug}`);
+router.get("/:short_code", async (req, res) => {
+  const { short_code } = req.params;
+
+  const result = await ShortUrlsModel.getByCode({ short_code });
+
+  res.redirect(result.original_url);
 });
 
 module.exports = router;
