@@ -1,0 +1,17 @@
+const { Model } = require("objection");
+
+class ShortUrls extends Model {
+  static get tableName() {
+    return "short_urls";
+  }
+
+  static get idColumn() {
+    return "id";
+  }
+
+  static async create({ data }) {
+    return await this.query().insert(data);
+  }
+}
+
+module.exports = ShortUrls;
