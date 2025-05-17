@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.string("short_code").notNullable().unique();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("updated_at").defaultTo(knex.fn.now());
-    table.timestamp("created_by").defaultTo(knex.fn.now());
+    table.timestamp("created_by");
     table.timestamp("expires_at").nullable();
     table.integer("count").defaultTo(0);
   });
