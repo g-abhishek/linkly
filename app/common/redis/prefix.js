@@ -1,0 +1,4 @@
+module.exports = {
+  CURRENT_COUNTER: "CURRENT_COUNTER",
+  SHORT_CODE: "SHORT_CODE",
+};
