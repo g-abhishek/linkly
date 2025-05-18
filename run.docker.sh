@@ -1,4 +1,4 @@
-export PORT=80
+export PORT=3000
 export NODE_ENV=development
 export POSTGRES_DB_URL="postgresql://root:root@postgres:5432/linkly"
 export REDIS_DB_URL="redis://redis:6379/0"
