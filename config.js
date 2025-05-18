@@ -21,6 +21,13 @@ const config = convict({
     env: "POSTGRES_DB_URL",
     arg: "postgres_db_url",
   },
+  redis_db_url: {
+    doc: "Redis DB.",
+    format: String,
+    default: "",
+    env: "REDIS_DB_URL",
+    arg: "redis_db_url",
+  },
 });
 
 config.validate({ allowed: "strict" });
