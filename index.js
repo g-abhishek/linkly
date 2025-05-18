@@ -2,7 +2,7 @@ const config = require("./config");
 require("./connections/postgres.init");
 const getMainServer = require("./app/server");
 
-const PORT = config.get("port") || 3000;
+const PORT = config.get("port");
 
 const app = getMainServer();
 

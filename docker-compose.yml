@@ -1,0 +1,47 @@
+version: '3.8'
+services: # Defines containers (services) your application needs.
+  linkly:
+    build: . # Docker will build an image using the Dockerfile in the current directory (.).
+    ports: 
+      - "3000:80"
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=${NODE_ENV}
+      - POSTGRES_DB_URL=${POSTGRES_DB_URL}
+      - REDIS_DB_URL=${REDIS_DB_URL}
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:15
+    restart: always # Ensures that if the container crashes, it will automatically restart.
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ./docker-volumes/pgdata:/var/lib/postgresql/data # Uses a named volume (pgdata) to persist PostgreSQL data outside the container.
+
+  redis:
+    image: redis:7
+    restart: always
+    volumes:
+      - ./docker-volumes/redisdata:/data
+
+# Declares a named volume called pgdata.
+# It will store PostgreSQL data persistently outside the container lifecycle.
+volumes:
+  pgdata:
+  redisdata:
+
+# Declares a custom bridge network called linkly-net.
+# This isolates your services from other containers on your system.
+# Enables DNS-style service discovery (e.g., postgres and redis as hostnames).
+networks:
+  linkly-net:
+    driver: bridge
+
+
+
+
