@@ -1,6 +1,6 @@
-version: '3.8'
+# version: '3.8'
 services: # Defines containers (services) your application needs.
-  linkly:
+  linkly-1:
     build: . # Docker will build an image using the Dockerfile in the current directory (.).
     ports: 
       - "3000:3000"
@@ -9,6 +9,23 @@ services: # Defines containers (services) your application needs.
       - NODE_ENV=${NODE_ENV}
       - POSTGRES_DB_URL=${POSTGRES_DB_URL}
       - REDIS_DB_URL=${REDIS_DB_URL}
+      - INSTANCE_NAME=linkly-1
+    depends_on:
+      - nginx
+      - postgres
+      - redis
+    networks:
+      - linkly-net
+  linkly-2:
+    build: . # Docker will build an image using the Dockerfile in the current directory (.).
+    ports: 
+      - "3001:3000"
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=${NODE_ENV}
+      - POSTGRES_DB_URL=${POSTGRES_DB_URL}
+      - REDIS_DB_URL=${REDIS_DB_URL}
+      - INSTANCE_NAME=linkly-1
     depends_on:
       - nginx
       - postgres

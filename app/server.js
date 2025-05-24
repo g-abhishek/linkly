@@ -7,6 +7,7 @@ const getMainServer = () => {
   require("./routes")(app);
 
   app.get("/", (req, res) => {
+    console.log("instance >>>", process.env.INSTANCE_NAME);
     res.send("Welcome to Linkly!");
   });
 
