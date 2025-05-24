@@ -25,7 +25,7 @@ services: # Defines containers (services) your application needs.
       - NODE_ENV=${NODE_ENV}
       - POSTGRES_DB_URL=${POSTGRES_DB_URL}
       - REDIS_DB_URL=${REDIS_DB_URL}
-      - INSTANCE_NAME=linkly-1
+      - INSTANCE_NAME=linkly-2
     depends_on:
       - nginx
       - postgres
