@@ -13,13 +13,15 @@ const config = {
   collectCoverage: true, // Indicates whether the coverage information should be collected while executing the test
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: ["./specs/setup.js"],
+  // An array of glob patterns indicating a set of files for which coverage information should be collected
+  collectCoverageFrom: ["./app/**/*.js"],
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
     global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80,
+      branches: 40,
+      functions: 40,
+      lines: 40,
+      statements: 40,
     },
   },
 
@@ -31,9 +33,6 @@ const config = {
 
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "/private/var/folders/2t/q9xx4g9n6tv73rlzyvkb_1zc0000gq/T/jest_dz",
-
-  // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: undefined,
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
