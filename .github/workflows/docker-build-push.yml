@@ -9,6 +9,11 @@ jobs:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest # This machine comes pre-installed with Docker and other common tools.
     steps:
+      - name: Debug partial secret
+        run: echo "Token prefix: ${DOCKERHUB_TOKEN:0:4}****"
+        env:
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
       # This step checks out the latest code from your GitHub repo into the workflow's VM.
       # It allows the next steps (like Docker build) to access your source files.
       - name: Checkout Code
