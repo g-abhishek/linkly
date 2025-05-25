@@ -36,3 +36,7 @@ jobs:
           context: .
           push: true
           tags: gabhishek/linkly:latest
+
+env:
+  ACTIONS_STEP_DEBUG: true
+
