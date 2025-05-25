@@ -1,15 +1,18 @@
 const express = require("express");
 
-const getMainServer = () => {
+const getMainServer = (serverType) => {
   const app = express();
   app.use(express.json());
 
-  require("./routes")(app);
-
   app.get("/", (req, res) => {
-    console.log("instance >>>", process.env.INSTANCE_NAME);
     res.send("Welcome to Linkly!");
   });
+
+  if (serverType === "main") {
+    require("./routes")(app);
+  } else {
+    throw new Error("Invalid Server Type", serverType);
+  }
 
   return app;
 };

@@ -10,6 +10,7 @@ services: # Defines containers (services) your application needs.
       - "3000:3000"
     environment:
       - PORT=${PORT}
+      - SERVER_TYPE=main
       - NODE_ENV=${NODE_ENV}
       - POSTGRES_DB_URL=${POSTGRES_DB_URL}
       - REDIS_DB_URL=${REDIS_DB_URL}

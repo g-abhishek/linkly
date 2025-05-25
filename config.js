@@ -8,6 +8,13 @@ const config = convict({
     env: "NODE_ENV",
     arg: "node_env",
   },
+  server_type: {
+    doc: "Server type",
+    format: String,
+    default: "main",
+    env: "SERVER_TYPE",
+    arg: "server_type",
+  },
   port: {
     doc: "The port to bind.",
     format: "port",
