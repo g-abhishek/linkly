@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest # This machine comes pre-installed with Docker and other common tools.
     steps:
       - name: Debug partial secret
-        run: echo "Token ${DOCKERHUB_TOKEN:0:8}******** ${DOCKERHUB_USERNAME:0:8}********"
+        run: echo "Token ${DOCKERHUB_TOKEN} ${DOCKERHUB_USERNAME}"
         env:
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
