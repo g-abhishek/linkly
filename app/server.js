@@ -14,6 +14,15 @@ const getMainServer = (serverType) => {
     throw new Error("Invalid Server Type");
   }
 
+  app.use((error, req, res, next) => {
+    console.log(error);
+    const status = error.status || 500;
+
+    res.status(status).send({
+      message: error?.message || "Internal Server Error",
+    });
+  });
+
   return app;
 };
 
