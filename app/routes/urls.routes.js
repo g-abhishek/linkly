@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
       short_code: short_code,
     },
   });
+  console.log("Short Code Created >>>", result);
 
   await shortCode({ short_code: short_code }).set(result);
 
