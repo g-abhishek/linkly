@@ -1,5 +1,10 @@
+const server = require("../../../server");
+const request = server("main");
+
 describe("URLS Endpoints", () => {
-  it("Should test it", () => {
-    expect(1).toBe(1);
+  fit("Should test it", async () => {
+    const result = await request.get("/urls/abc");
+    expect(result.status).toBe(404);
+    expect(result.body.message).toBe("URL not found");
   });
 });
