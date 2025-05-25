@@ -8,6 +8,33 @@ jobs:
   test-and-check-coverage:
     name: Run test and Check coverage
     runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        # health checks to make sure the service is up and ready before your tests run.
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -19,6 +46,20 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      # This ensures Redis is 100% up and responding before your tests start.
+      - name: Wait for Redis to be ready
+        run: |
+          echo "Waiting for Redis..."
+          until redis-cli ping | grep PONG; do sleep 1; done
+      # This ensures Postgres is 100% up and responding before your tests start.
+      - name: Wait for Postgres to be ready
+        run: |
+          echo "Waiting for Postgres..."
+          until pg_isready -h localhost -p 5432; do sleep 1; done
+
+      - name: Run migrations  
+        run: npm run migrate
 
       - name: Run tests
         run: npm run test
@@ -56,5 +97,13 @@ jobs:
           push: true
           tags: gabhishek/linkly:latest
 
+
+
+# if we check, we have defined options to check health of Postgress and also in steps to verify the same, why we need those 2?
+# GitHub Actions does not block job steps until the service health check passes.
+# It only ensures the container is started, not necessarily healthy.
+# So the manual wait is a safer fallback.
+# Your app or test might connect before PostgreSQL is truly ready.
+# Especially true for complex containers (e.g., those that run migrations or init scripts).
 
 
