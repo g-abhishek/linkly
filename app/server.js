@@ -11,7 +11,7 @@ const getMainServer = (serverType) => {
   if (serverType === "main") {
     require("./routes")(app);
   } else {
-    throw new Error("Invalid Server Type", serverType);
+    throw new Error("Invalid Server Type");
   }
 
   return app;

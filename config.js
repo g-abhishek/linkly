@@ -11,7 +11,7 @@ const config = convict({
   server_type: {
     doc: "Server type",
     format: String,
-    default: "main",
+    default: "",
     env: "SERVER_TYPE",
     arg: "server_type",
   },
