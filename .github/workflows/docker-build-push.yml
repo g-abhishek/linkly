@@ -5,11 +5,10 @@ on:
       - main
 
 jobs:
-  build-and-push:
-    name: Build and Push Docker Image
-    runs-on: ubuntu-latest # This machine comes pre-installed with Docker and other common tools.
-      # This step checks out the latest code from your GitHub repo into the workflow's VM.
-      # It allows the next steps (like Docker build) to access your source files.
+  test-and-check-coverage:
+    name: Run test and Check coverage
+    runs-on: ubuntu-latest
+    setps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -22,7 +21,15 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm test
+        run: npm run test
+
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest # This machine comes pre-installed with Docker and other common tools.
+      # This step checks out the latest code from your GitHub repo into the workflow's VM.
+      # It allows the next steps (like Docker build) to access your source files.
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
       # Sets up Docker Buildx, a modern builder from Docker 
       # Required for docker/build-push-action
