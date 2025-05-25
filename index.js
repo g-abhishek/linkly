@@ -1,5 +1,4 @@
 const config = require("./config");
-require("./connections/postgres.init");
 const getMainServer = require("./app/server");
 
 const PORT = config.get("port");
