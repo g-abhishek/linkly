@@ -3,6 +3,7 @@ require("./connections/postgres.init");
 const getMainServer = require("./app/server");
 
 const PORT = config.get("port");
+console.log("config >>>>", config.getProperties());
 
 const app = getMainServer();
 

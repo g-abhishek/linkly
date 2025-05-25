@@ -14,19 +14,50 @@ const config = convict({
     default: 3000,
     env: "PORT",
   },
-  postgres_db_url: {
-    doc: "Postgres DB.",
-    format: String,
-    default: "",
-    env: "POSTGRES_DB_URL",
-    arg: "postgres_db_url",
-  },
+
   redis_db_url: {
     doc: "Redis DB.",
     format: String,
     default: "",
     env: "REDIS_DB_URL",
     arg: "redis_db_url",
+  },
+  postgres: {
+    postgres_db_url: {
+      doc: "Postgres DB.",
+      format: String,
+      default: "",
+      env: "POSTGRES_DB_URL",
+      arg: "postgres_db_url",
+    },
+    postgres_user: {
+      doc: "Postgres User.",
+      format: String,
+      default: "",
+      env: "POSTGRES_USER",
+      arg: "postgres_user",
+    },
+    postgres_password: {
+      doc: "Postgres User.",
+      format: String,
+      default: "",
+      env: "POSTGRES_PASSWORD",
+      arg: "postgres_password",
+    },
+    postgres_db: {
+      doc: "Postgres DB.",
+      format: String,
+      default: "",
+      env: "POSTGRES_DB",
+      arg: "postgres_db",
+    },
+    postgres_host: {
+      doc: "Postgres Host.",
+      format: String,
+      default: "",
+      env: "POSTGRES_HOST",
+      arg: "postgres_host",
+    },
   },
 });
 
