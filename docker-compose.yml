@@ -2,6 +2,10 @@ version: '3.8'
 services: # Defines containers (services) your application needs.
   linkly-1:
     build: . # Docker will build an image using the Dockerfile in the current directory (.).
+    volumes:
+      - .:/srv/linkly
+      - /srv/linkly/node_modules  # Avoid overwriting node_modules
+    command: npm run dev
     ports: 
       - "3000:3000"
     environment:

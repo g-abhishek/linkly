@@ -11,4 +11,4 @@ COPY . .
 # ENV PORT=80
 ENV NODE_ENV=production
 
-ENTRYPOINT [ "node", "index.js" ]
+CMD [ "node", "index.js" ]
