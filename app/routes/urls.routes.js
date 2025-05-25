@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { shortCode } = require("../common/redis");
 const ShortUrlsModel = require("../models/short_urls.models");
+const { NotFoundError } = require("../utils/errors.utisl");
 const { getShortCode } = require("../utils/short-code-generator.utils");
 
 router.post("/", async (req, res) => {
@@ -33,8 +34,11 @@ router.get("/:short_code", async (req, res) => {
   }
 
   const result = await ShortUrlsModel.getByCode({ short_code });
+  if (!result) {
+    throw new NotFoundError("URL not found");
+  }
 
-  return res.redirect(result.original_url);
+  return res.redirect(result?.original_url);
 });
 
 module.exports = router;
