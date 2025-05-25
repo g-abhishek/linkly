@@ -1,4 +1,4 @@
-# version: '3.8'
+version: '3.8'
 services: # Defines containers (services) your application needs.
   linkly-1:
     build: . # Docker will build an image using the Dockerfile in the current directory (.).
@@ -10,28 +10,30 @@ services: # Defines containers (services) your application needs.
       - POSTGRES_DB_URL=${POSTGRES_DB_URL}
       - REDIS_DB_URL=${REDIS_DB_URL}
       - INSTANCE_NAME=linkly-1
+    mem_limit: 100m  # Limit to 100MB
+    cpus: "0.2"   # Limit to 20% of one CPU
     depends_on:
       - nginx
       - postgres
       - redis
     networks:
       - linkly-net
-  linkly-2:
-    build: . # Docker will build an image using the Dockerfile in the current directory (.).
-    ports: 
-      - "3001:3000"
-    environment:
-      - PORT=${PORT}
-      - NODE_ENV=${NODE_ENV}
-      - POSTGRES_DB_URL=${POSTGRES_DB_URL}
-      - REDIS_DB_URL=${REDIS_DB_URL}
-      - INSTANCE_NAME=linkly-2
-    depends_on:
-      - nginx
-      - postgres
-      - redis
-    networks:
-      - linkly-net
+  # linkly-2:
+  #   build: . # Docker will build an image using the Dockerfile in the current directory (.).
+  #   ports: 
+  #     - "3001:3000"
+  #   environment:
+  #     - PORT=${PORT}
+  #     - NODE_ENV=${NODE_ENV}
+  #     - POSTGRES_DB_URL=${POSTGRES_DB_URL}
+  #     - REDIS_DB_URL=${REDIS_DB_URL}
+  #     - INSTANCE_NAME=linkly-2
+  #   depends_on:
+  #     - nginx
+  #     - postgres
+  #     - redis
+  #   networks:
+  #     - linkly-net
 
   nginx:
     build: ../nginx
