@@ -77,7 +77,7 @@ jobs:
         run: |
           COVERAGE=$(node -p "require('./coverage/coverage-summary.json').total.statements.pct")
           echo "Coverage: $COVERAGE%"
-          if (( $(echo "$COVERAGE < 50" | bc -l) )); then
+          if (( $(echo "$COVERAGE < 90" | bc -l) )); then
             echo "Coverage is below 50%. Exiting."
             exit 1
           fi
