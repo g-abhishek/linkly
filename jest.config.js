@@ -35,12 +35,7 @@ const config = {
   // cacheDirectory: "/private/var/folders/2t/q9xx4g9n6tv73rlzyvkb_1zc0000gq/T/jest_dz",
 
   // A list of reporter names that Jest uses when writing coverage reports
-  // coverageReporters: [
-  //   "json",
-  //   "text",
-  //   "lcov",
-  //   "clover"
-  // ],
+  coverageReporters: ["json-summary", "lcov", "text"],
 
   // A path to a custom dependency extractor
   // dependencyExtractor: undefined,
